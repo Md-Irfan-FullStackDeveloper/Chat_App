@@ -37,8 +37,8 @@ const Homepage = () => {
       >
         <Tabs variant="soft-rounded">
           <TabList mb="1rem">
-            <Tab w="50%">Sign up</Tab>
             <Tab w="50%">Login</Tab>
+            <Tab w="50%">Sign up</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
