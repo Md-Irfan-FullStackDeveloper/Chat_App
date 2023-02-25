@@ -11,17 +11,16 @@ const Homepage = () => {
         w="100%"
         m="40px 0 15px 0"
         borderRadius="lg"
-        borderWidth="1px"
         p="3"
-        bg="white"
         boxShadow="dark-lg"
+        bg='#2B65EC'
       >
         <Text
           textAlign="center"
           fontWeight="bold"
           fontFamily="Work sans"
-          color="black"
           fontSize="1.2rem"
+          color='white'
         >
           SkyNet
         </Text>
@@ -29,16 +28,16 @@ const Homepage = () => {
 
       <Box
         boxShadow="dark-lg"
-        bg="white"
+        bg='#2B65EC'
         w="100%"
         p={4}
         borderRadius="lg"
-        borderWidth="1px"
+        color='white'
       >
-        <Tabs variant="soft-rounded">
+        <Tabs variant="soft-rounded" colorScheme='cyan'>
           <TabList mb="1rem">
-            <Tab w="50%">Login</Tab>
-            <Tab w="50%">Sign up</Tab>
+            <Tab color='white' w="50%">Login</Tab>
+            <Tab color='white' w="50%">Sign up</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
