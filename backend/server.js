@@ -7,6 +7,7 @@ const {
   notFound,
   errorHandler,
 } = require("./middleware/errorHandlerMiddleware");
+const { chatRouter } = require("./routes/chatRoutes");
 
 const port = process.env.PORT || 8000;
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/chat", chatRouter);
 
 app.use(notFound);
 app.use(errorHandler);
