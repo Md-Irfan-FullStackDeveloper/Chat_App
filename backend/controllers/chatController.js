@@ -70,9 +70,56 @@ const getChats = async (req, res) => {
   }
 };
 
-const createGroups = async (req, res) => {};
+const createGroups = async (req, res) => {
+  if (!req.body.users || !req.body.name) {
+    return res.status(400).json({ message: "Please fill all fields" });
+  }
 
-const renameGroups = async (req, res) => {};
+  let users = JSON.parse(req.body.users);
+
+  if (users.length < 2) {
+    return res
+      .status(400)
+      .json({ message: "More then 2 users required to form a group chat" });
+  }
+
+  users.push(req.user);
+
+  try {
+    const groupChat = await Chat.create({
+      chatName: req.body.name,
+      users: users,
+      isGroupChat: true,
+      groupAdmin: req.user,
+    });
+
+    const fullChat = await Chat.findOne({ _id: groupChat._id })
+      .populate("users", "-password")
+      .populate("groupAdmin", "-password");
+
+    return res.status(200).json(fullChat);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+const renameGroups = async (req, res) => {
+  const { chatId, chatName } = req.body;
+
+  const updatedChat = await Chat.findOneAndUpdate(
+    chatId,
+    { chatName },
+    { new: true }
+  )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  if (!updatedChat) {
+    res.status(404);
+    throw new Error("Chat not found");
+  }
+  return res.status(200).json(updatedChat);
+};
 
 const removeFromGroups = async (req, res) => {};
 
