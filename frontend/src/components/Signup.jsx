@@ -25,6 +25,7 @@ const Signup = () => {
 
   const handleClick = () => setShow(!show);
 
+  // uploading the picture on cloudinary
   const postDetails = (pic) => {
     setLoading(true);
 
@@ -118,7 +119,7 @@ const Signup = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
 
       setLoading(false);
-      navigate("/chats", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       toast({
         title: "Error occurs.",

@@ -2,9 +2,6 @@
 
 .App{
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #151B54;
     /* background-image: url('./assets/background.jpg');
     background-size: cover; */

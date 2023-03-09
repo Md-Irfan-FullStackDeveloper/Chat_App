@@ -121,9 +121,43 @@ const renameGroups = async (req, res) => {
   return res.status(200).json(updatedChat);
 };
 
-const removeFromGroups = async (req, res) => {};
+const addToGroups = async (req, res) => {
+  const { chatId, userId } = req.body;
 
-const addToGroups = async (req, res) => {};
+  const added = await Chat.findByIdAndUpdate(
+    chatId,
+    { $push: { users: userId } },
+    { new: true }
+  )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  if (!added) {
+    res.status(404);
+    throw new Error("User not found");
+  } else {
+    return res.status(200).json(added);
+  }
+};
+
+const removeFromGroups = async (req, res) => {
+  const { chatId, userId } = req.body;
+
+  const removed = await Chat.findByIdAndUpdate(
+    chatId,
+    { $pull: { users: userId } },
+    { new: true }
+  )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  if (!removed) {
+    res.status(404);
+    throw new Error("User not found");
+  } else {
+    return res.status(200).json(removed);
+  }
+};
 
 module.exports = {
   getChats,

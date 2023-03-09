@@ -1,10 +1,21 @@
 import { Box, Container, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) {
+      navigate("/chats");
+    }
+  }, [navigate]);
+
   return (
     <Container maxW="xl" centerContent>
       <Box
@@ -13,14 +24,14 @@ const Homepage = () => {
         borderRadius="lg"
         p="3"
         boxShadow="dark-lg"
-        bg='#2B65EC'
+        bg="#2B65EC"
       >
         <Text
           textAlign="center"
           fontWeight="bold"
           fontFamily="Work sans"
           fontSize="1.2rem"
-          color='white'
+          color="white"
         >
           SkyNet
         </Text>
@@ -28,16 +39,20 @@ const Homepage = () => {
 
       <Box
         boxShadow="dark-lg"
-        bg='#2B65EC'
+        bg="#2B65EC"
         w="100%"
         p={4}
         borderRadius="lg"
-        color='white'
+        color="white"
       >
-        <Tabs variant="soft-rounded" colorScheme='cyan'>
+        <Tabs variant="soft-rounded" colorScheme="cyan">
           <TabList mb="1rem">
-            <Tab color='white' w="50%">Login</Tab>
-            <Tab color='white' w="50%">Sign up</Tab>
+            <Tab color="white" w="50%">
+              Login
+            </Tab>
+            <Tab color="white" w="50%">
+              Sign up
+            </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
